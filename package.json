@@ -1,0 +1,29 @@
+{
+  "name": "web-server-node",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "jest",
+    "start": "node server.js",
+    "count-files": "node user-info.js"
+    
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LMatysiak777/web-server-node.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LMatysiak777/web-server-node/issues"
+  },
+  "homepage": "https://github.com/LMatysiak777/web-server-node#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-handlebars": "^5.3.3"
+  },
+  "devDependencies": {
+    "jest": "^27.1.0"
+  }
+}
