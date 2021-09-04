@@ -1,2 +1,5 @@
 # web-server-node
-Very basic web server using node for learning purpose
+Very basic web server using node 
+- routings
+- tests
+- view handlers
