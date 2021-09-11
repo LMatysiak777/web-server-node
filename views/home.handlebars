@@ -1,7 +1,16 @@
 <h1>Welcome to Travel site</h1>
-
+{{!-- { currency: {name:'USDollar', abbrev: 'USD',},
+tours: [{name: 'Hood river', price:$99.95}, {name: 'Oregon Coast', price:$159.99},],
+specialsUrl: '/january-specials',
+currencies: ['USD,'GBO','BTC'],} --}}
 {{#if fortune}}
     <p>FORTUNE OF THE DAY: </p>
     <blockquote>{{fortune}}</blockquote>
 
 {{/if}}
+
+{{#if additionalMessage}}
+    <p>Message for you: {{additionalMessage}}</p>
+{{/if}}
+
+   

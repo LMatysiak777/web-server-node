@@ -8,24 +8,31 @@ const app = express();
 const expressHandlebars = require("express-handlebars");
 const fortune = require("./lib/fortune");
 const handlers = require("./lib/handlers");
+const { assertTSPropertySignature } = require("@babel/types");
 
 // configure Handlebars view engine
 app.engine(
   "handlebars",
   expressHandlebars({
     defaultLayout: "main",
+    copyrights: "COPYRIGHTS",
+    // default .handlebar extension can be changed with extname
+    //     extname: ".hbs",
   })
 );
 app.set("view engine", "handlebars");
 
 // adding static middleware
 app.use(express.static(__dirname + "/public"));
+app.use(express.static(__dirname + "/views/layouts"));
 
 app.get("/", handlers.home);
+app.get("/alt", handlers.alt);
+
 app.get("/about", handlers.about);
-app.use(handlers.notFound);
-app.use(handlers.serverError);
-app.use("/reqdetail", (req, res) => {
+
+app.get("/reqdetail", (req, res) => {
+  alert(req.ip);
   res.send(req.headers);
 });
 
@@ -37,6 +44,19 @@ app.get("/headers", (req, res) => {
   );
   res.send(headers.join("\n"));
 });
+
+app.get("/contactus", handlers.contactus);
+
+app.get("submit", (req, res) => {
+  res.send(req.name);
+});
+
+app.use(handlers.notFound);
+app.use(handlers.serverError);
+
+app.listen(port, () =>
+  console.log(`Server started at ${port} port; hit Ctrl-C to stop`)
+);
 
 // BEFORE HANDLERS:
 // app.get("/", (req, res) =>
@@ -78,10 +98,6 @@ app.get("/headers", (req, res) => {
 //   res.status(500);
 //   res.send("500- Server Error ");
 // });
-
-app.listen(port, () =>
-  console.log(`Server started at ${port} port; hit Ctrl-C to stop`)
-);
 
 // PURE NODE SIMPLEST SERVER:
 
