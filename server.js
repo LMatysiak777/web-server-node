@@ -9,6 +9,9 @@ const expressHandlebars = require("express-handlebars");
 const fortune = require("./lib/fortune");
 const handlers = require("./lib/handlers");
 const { assertTSPropertySignature } = require("@babel/types");
+const bodyParser = require("body-parser");
+app.use(bodyParser.urlencoded());
+app.use(bodyParser.json());
 
 // configure Handlebars view engine
 app.engine(
@@ -51,7 +54,13 @@ app.get("submit", (req, res) => {
   res.send(req.name);
 });
 
+app.get("/newsletter-signup", handlers.newsletterSignup);
+app.post("/newsletter-signup/process", handlers.newsletterSignupProcess);
+app.get("/newsletter-signup/thank-you", handlers.newsletterSignupThankYou);
+app.post("/newsletter-signup/thank-you", handlers.newsletterSignupThankYou);
+
 app.use(handlers.notFound);
+
 app.use(handlers.serverError);
 
 app.listen(port, () =>
